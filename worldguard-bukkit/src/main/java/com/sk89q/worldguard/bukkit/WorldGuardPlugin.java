@@ -251,7 +251,7 @@ public class WorldGuardPlugin extends JavaPlugin {
             return blacklistCounts;
         }));
         metrics.addCustomChart(new Metrics.SimplePie("chest_protection", () ->
-                "" + platform.getGlobalStateManager().getWorldConfigs().stream().anyMatch(cfg -> cfg.signChestProtection)));
+                "" + platform.getGlobalStateManager().getWorldConfigs().stream().anyMatch(cfg -> cfg.getChestProtection().hasBeenUsed())));
         metrics.addCustomChart(new Metrics.SimplePie("build_permissions", () ->
                 "" + platform.getGlobalStateManager().getWorldConfigs().stream().anyMatch(cfg -> cfg.buildPermissions)));
 

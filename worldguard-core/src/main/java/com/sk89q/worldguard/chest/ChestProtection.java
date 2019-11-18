@@ -71,4 +71,7 @@ public interface ChestProtection {
                 || blockType == BlockTypes.DROPPER;
     }
 
+    default boolean hasBeenUsed() {
+        return false;
+    }
 }

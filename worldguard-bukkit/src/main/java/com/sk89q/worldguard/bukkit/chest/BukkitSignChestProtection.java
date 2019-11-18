@@ -28,9 +28,12 @@ import org.bukkit.block.Sign;
 
 public class BukkitSignChestProtection extends SignChestProtection {
 
+    private boolean hasBeenUsed;
+
     private Boolean isProtectedSign(Sign sign, LocalPlayer player) {
         if (sign.getLine(0).equalsIgnoreCase("[Lock]")) {
             if (player == null) { // No player, no access
+                hasBeenUsed = true;
                 return true;
             }
             
@@ -49,6 +52,15 @@ public class BukkitSignChestProtection extends SignChestProtection {
         if (!(state instanceof Sign)) {
             return null;
         }
-        return isProtectedSign((Sign) state, player);
+        Boolean protectedSign = isProtectedSign((Sign) state, player);
+        if (protectedSign != null && protectedSign) {
+            hasBeenUsed = true;
+        }
+        return protectedSign;
+    }
+
+    @Override
+    public boolean hasBeenUsed() {
+        return hasBeenUsed;
     }
 }
