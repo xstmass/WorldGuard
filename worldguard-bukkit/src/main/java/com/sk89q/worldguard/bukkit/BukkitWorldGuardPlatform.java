@@ -243,12 +243,14 @@ public class BukkitWorldGuardPlatform implements WorldGuardPlatform {
     @Override
     public ProfileService createProfileService(ProfileCache profileCache) {
         List<ProfileService> services = new ArrayList<>();
+        
+        /** Fix server freeze if online-mode = true and used Sashok724 launcher and his forks e.g. KeeperJerry Launcher or GravitLauncher
         if (PaperLib.isPaper()) {
             // Paper has a shared cache
             services.add(PaperPlayerService.getInstance());
-        } else {
+        } else {*/
             services.add(BukkitPlayerService.getInstance());
-        }
+        //}
         services.add(HttpRepositoryService.forMinecraft());
         return new CacheForwardingService(new CombinedProfileService(services),
                 profileCache);
